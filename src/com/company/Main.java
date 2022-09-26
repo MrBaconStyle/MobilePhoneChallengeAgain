@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     private static Scanner scanner = new Scanner(System.in);
-    private static MobilePhone contactList = new MobilePhone();
+    private static MobilePhone newPerson;
 
     public static void main(String[] args) {
 
@@ -22,7 +22,7 @@ public class Main {
                     printInstructions();
                     break;
                 case 1:
-                    contactList.queryContact();
+                    newPerson.queryContact();
                     break;
                 case 2:
                     newContact();
@@ -53,6 +53,6 @@ public class Main {
 
     public static void newContact() {
         System.out.println("Enter new contact: ");
-        contactList.addContact(scanner.nextLine());
+
     }
 }

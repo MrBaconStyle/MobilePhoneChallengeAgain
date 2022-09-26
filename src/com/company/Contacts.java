@@ -3,18 +3,22 @@ package com.company;
 public class Contacts {
 
     private String name;
-    private String number;
+    private String phoneNumber;
 
-//    public Contacts(String name, String number) {
-//        this.name = name;
-//        this.number = number;
-//    }
+    public Contacts(String name, String phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getName() {
         return name;
     }
 
     public String getNumber() {
-        return number;
+        return phoneNumber;
+    }
+
+    public static Contacts createContact(String name, String phoneNumber) {
+        return new Contacts(name, phoneNumber);
     }
 }

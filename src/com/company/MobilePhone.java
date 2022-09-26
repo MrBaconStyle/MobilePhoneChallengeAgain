@@ -3,15 +3,30 @@ package com.company;
 import java.util.ArrayList;
 
 public class MobilePhone {
-    private ArrayList<Contacts> contactsList = new ArrayList<Contacts>();
+    private String myNumber;
+    private ArrayList<Contacts> contactsList;// = new ArrayList<Contacts>();
 
-    public void addContact(Contacts contact) {
-        int position = findContact(contact);
-        if (position < 0) {
-            contactsList.add(contact);
-        } else {
-            System.out.println("Contact already exists.");
+    public MobilePhone(String myNumber) {
+        this.myNumber = myNumber;
+        this.contactsList = new ArrayList<Contacts>();
+    }
+
+//    public void addContact(Contacts contact) {
+//        int position = findContact(contact);
+//        if (position < 0) {
+//            contactsList.add(contact);
+//        } else {
+//            System.out.println("Contact already exists.");
+//        }
+//    }
+
+    public boolean addContact (Contacts contact) {
+        if (findContact(contact.getName()) > 0) {
+            System.out.println("Contact already exists");
+            return false;
         }
+        contactsList.add(contact);
+        return true;
     }
 
     public void queryContact() {
@@ -21,12 +36,14 @@ public class MobilePhone {
         }
     }
 
-    public void modifyContact(Contacts currentContact, Contacts newContact) {
+    public boolean modifyContact(Contacts currentContact, Contacts newContact) {
         int position = findContact(currentContact);
         if (position < 0) {
             System.out.println("Contact can't be modified. There is no such contact in contact list.");
+            return false;
         } else {
             modifyContact(position, newContact);
+            return true;
         }
     }
 
@@ -49,7 +66,24 @@ public class MobilePhone {
         contactsList.remove(position);
     }
 
-    private int findContact (Contacts contact) {
+    public String queryContact(Contacts contact) {
+        if (findContact(contact) >=0) {
+            return contact.getName();
+        }
+         return null;
+    }
+
+    private int findContact(Contacts contact) {
         return contactsList.indexOf(contact);
+    }
+
+    private int findContact(String contactName) {
+        for (int i=0; i<contactsList.size(); i++) {
+            Contacts contacts = this.contactsList.get(i);
+            if (contacts.getName().equals(contactName)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
