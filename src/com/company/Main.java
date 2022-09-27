@@ -88,5 +88,14 @@ public class Main {
         }
     }
 
-
+    private static void removeMyContact() {
+        System.out.println("Enter contact to be deleted: ");
+        String name = scanner.nextLine();
+        Contacts existingContactRecord = newPerson.queryContact(name);
+        if (existingContactRecord == null) {
+            System.out.println("Contact not found");
+            return;
+        }
+        removeMyContact(existingContactRecord);
+    }
 }
