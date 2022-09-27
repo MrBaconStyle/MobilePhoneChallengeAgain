@@ -22,17 +22,17 @@ public class MobilePhone {
 
     public boolean addContact (Contacts contact) {
         if (findContact(contact.getName()) > 0) {
-            System.out.println("Contact already exists");
+            //System.out.println("Contact already exists");
             return false;
         }
         contactsList.add(contact);
         return true;
     }
 
-    public void queryContact() {
-        System.out.println("There are " + contactsList.size() + " in contact list");
-        for (int i=0; i < contactsList.size(); i++) {
-            System.out.println((i+1) + ". " + contactsList.get(i));
+    public void printContact() {
+        System.out.println("There are " + this.contactsList.size() + " in contact list");
+        for (int i=0; i < this.contactsList.size(); i++) {
+            System.out.println((i+1) + ". " + this.contactsList.get(i).getName() + " -> " + this.contactsList.get(i).getPhoneNumber());
         }
     }
 
@@ -52,12 +52,15 @@ public class MobilePhone {
         System.out.println("Contact " + contact + " has been modified.");
     }
 
-    public void removeContact(Contacts contact) {
+    public boolean removeContact(Contacts contact) {
         int position = findContact(contact);
         if (position < 0) {
             System.out.println("Contact can't be deleted. There is no such contact in contact list");
+            return false;
         } else {
             removeContact(position);
+            System.out.println(contact.getName() + ", was deleted.");
+            return true;
         }
     }
 
@@ -71,6 +74,14 @@ public class MobilePhone {
             return contact.getName();
         }
          return null;
+    }
+
+    public Contacts queryContact(String name) {
+        int position = findContact(name);
+        if (position >=0) {
+            return this.contactsList.get(position);
+        }
+        return null;
     }
 
     private int findContact(Contacts contact) {
